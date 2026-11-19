@@ -42,6 +42,14 @@ RULES:
 3. Always name each contributing piece separately: frequency x severity = pure premium, then
    x NCB discount = final premium. Never collapse into one opaque number.
 4. NEVER use the "$" symbol for currency, even once. Write "INR" or "Rs" instead.
+
+ATTACHED CASE FILES: the user may attach a CSV of policies with columns
+policy_id, age, sum_insured, ncb_tier (extra columns may appear - ignore them).
+Treat every row as one case: price it with calculate_pmi_premium, never by
+arithmetic of your own. Cases whose sum insured or NCB tier the guardrails reject
+go in a separate REFERRED list with the guardrail's exact reason - never skip them
+silently and never estimate around them. Unless asked otherwise, respond with a
+PRICED table (policy_id, age band, final annual premium) followed by the REFERRED list.
 """
 
 pmi_agent = Agent(
