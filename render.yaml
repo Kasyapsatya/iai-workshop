@@ -1,0 +1,18 @@
+# Render Blueprint for the AgentOS demo app (agentos/).
+# Render: New > Blueprint > pick this repo. It will prompt for GOOGLE_API_KEY.
+services:
+  - type: web
+    name: iai-workshop-agentos
+    runtime: python
+    plan: free            # free sleeps after ~15 idle min; switch to "starter" to keep it always on
+    region: singapore
+    branch: main
+    buildCommand: pip install -r agentos/requirements.txt
+    startCommand: uvicorn --app-dir agentos app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: GOOGLE_API_KEY
+        sync: false       # entered once in the Render dashboard, never committed

@@ -1,0 +1,15 @@
+# Slim dependency set for hosting the AgentOS app (used by render.yaml).
+# Only what agentos/ imports at runtime; the notebook-only packages in
+# pyproject.toml (jupyter, xgboost, statsmodels, shap, matplotlib, ...) are
+# deliberately left out. Versions match uv.lock so the pricing pickles load
+# exactly as they do locally.
+agno==3.0.0
+google-genai==2.19.0
+pandas==3.0.5
+numpy==2.5.2
+scikit-learn==1.9.0
+python-dotenv==1.2.3
+fastapi==0.141.1
+uvicorn==0.52.4
+sqlalchemy==2.0.52
+python-multipart==0.0.32

@@ -26,6 +26,24 @@ uv run python agentos/app.py
 
 The server starts on http://localhost:7777.
 
+## Host it online (Render)
+
+The repo root has a `render.yaml` Blueprint. It installs only
+`agentos/requirements.txt` (no Jupyter, xgboost, statsmodels, shap or
+matplotlib) and starts the app on Render's port.
+
+1. In the Render dashboard: **New → Blueprint**, connect GitHub, pick this repo.
+2. When prompted, paste your Gemini key into `GOOGLE_API_KEY`, then **Apply**.
+3. Wait for the build; Render shows a URL like
+   `https://iai-workshop-agentos.onrender.com`. Check `<url>/health` returns `ok`.
+4. In [os.agno.com](https://os.agno.com), add a new OS with that URL instead of
+   `http://localhost:7777`.
+
+Notes: the free plan sleeps after ~15 idle minutes (first request then takes
+~1 minute) — change `plan: free` to `plan: starter` in `render.yaml` to keep it
+always on. Chat sessions live in SQLite on the instance and reset on every
+redeploy. There is no authentication, so keep the URL private.
+
 ## Talk to the agents
 
 **Option A — chat UI (recommended for the demo):** open
